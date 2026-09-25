@@ -1,0 +1,35 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'ir.khanehbekhaneh.app'
+    compileSdk 36
+
+    buildFeatures { buildConfig true }
+
+    defaultConfig {
+        applicationId 'ir.khanehbekhaneh.app'
+        minSdk 23
+        targetSdk 36
+        versionCode 701
+        versionName '0.7.1'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            def apiBase = project.findProperty('KHB_API_BASE') ?: ''
+            buildConfigField 'String', 'KHB_API_BASE', '"' + apiBase.replace('"', '\\"') + '"'
+        }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            def apiBase = project.findProperty('KHB_DEBUG_API_BASE') ?: 'http://localhost:8000'
+            buildConfigField 'String', 'KHB_API_BASE', '"' + apiBase.replace('"', '\\"') + '"'
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core:1.16.0'
+}

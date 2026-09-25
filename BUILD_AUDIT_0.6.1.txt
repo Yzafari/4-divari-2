@@ -1,0 +1,41 @@
+۴ دیواری — BUILD AUDIT 0.6.2
+Date: 2026-09-22
+
+SOURCE STATUS
+- The last complete source physically recoverable in the current environment was v0.6.2.
+- The previously discussed v0.6.2 working tree was not physically present, so this package is explicitly a reconstructed 0.6.2 build from the recoverable source.
+
+VERIFIED HERE
+[PASS] node scripts/build.js
+[PASS] node scripts/verify.js
+[PASS] node --check assets/js/app.js
+[PASS] node --check service-worker.js
+[PASS] python3 -m py_compile backend/app/main.py backend/tests/smoke.py
+[PASS] backend/tests/smoke.py
+[PASS] production JWT default/empty-secret guard
+[PASS] Android Web Core synchronization into android/app/src/main/assets/www
+[PASS] iOS Web Core synchronization into ios/KhanehBeKhaneh/www
+[PASS] Backend IDOR test: user B cannot read user A private listing
+[PASS] Backend listing privacy: pending listings are not exposed by public listing search
+[PASS] Public approved listing endpoint does not expose identity documents
+
+NOT VERIFIED IN THIS LINUX ENVIRONMENT
+[NOT RUN] Real Android Gradle assembleDebug/assembleRelease (Android SDK/Gradle unavailable locally)
+[NOT RUN] Real iOS Xcode build/signing (macOS/Xcode unavailable)
+[NOT RUN] SMS provider
+[NOT RUN] FCM/APNs push credentials
+[NOT RUN] PostgreSQL production migration
+[NOT RUN] Production object storage/CDN
+[NOT RUN] Payment gateway
+[NOT RUN] Official identity/KATEB integration
+[NOT RUN] Independent penetration test/load test
+
+SECURITY NOTE
+- The frontend still contains a local operator/demo panel because the recoverable Web Core was a prototype.
+- That local panel is not a substitute for Backend role authentication and must not be used as production authorization.
+- Production operator access must use the FastAPI role-based API.
+
+DELIVERY
+- Complete source package: Web + Android + iOS + Python backend
+- Separate Python backend package
+- No production APK is claimed or included as a verified artifact.
